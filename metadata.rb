@@ -1,7 +1,9 @@
-maintainer       "James Hardie Building Products, Inc."
-maintainer_email "doc.walker@jameshardie.com"
-license          "Apache 2.0"
-description      "Installs/Configures r_project"
+name              'r_project'
+version           '0.1.0'
 
-version          "0.0.1"
-depends          "yum"
+maintainer        'James Hardie Building Products, Inc.'
+maintainer_email  'doc.walker@jameshardie.com'
+license           'Apache 2.0'
+description       'Installs/Configures r_project'
+
+depends           'yum'
