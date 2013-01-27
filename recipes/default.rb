@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+include_recipe 'yum::epel'
 # install R via epel
 package 'R' do
   version node['r_project']['r']['version']
