@@ -18,16 +18,17 @@
 #
 
 include_recipe 'yum::epel'
+
+#-------------------------------------------------------- install dependencies
 # install R via epel
 package 'R' do
   version node['r_project']['r']['version']
 end # package 'R'
 
-
+#------------------------------------------------------ download & install qcc
 # set qcc filename
 qcc_tar_gz = "qcc_#{node['r_project']['qcc']['version']}.tar.gz"
 qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
-
 
 # download qcc unless library is already installed
 qcc_installed = "echo 'library(qcc)' | R --vanilla --quiet"
@@ -39,19 +40,17 @@ remote_file qcc_filename do
   mode     '0644'
   notifies :run, 'bash[install_qcc_library]', :immediately
   not_if qcc_installed
-end
-
+end # remote_file
 
 # install qcc library
 bash 'install_qcc_library' do
   cwd ::File.dirname(qcc_filename)
   code "sudo -E sh -c 'R CMD INSTALL #{qcc_filename}'"
   not_if qcc_installed
-end
-
+end # bash
 
 # uninstall qcc library (not currently used)
 bash 'uninstall_qcc_library' do
   code "sudo -E sh -c 'R CMD REMOVE qcc'"
   action :nothing
-end
+end # bash
