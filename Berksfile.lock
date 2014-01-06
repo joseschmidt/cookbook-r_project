@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "r_project": {
+      "path": "."
+    },
+    "yum": {
+      "locked_version": "2.1.0"
+    }
+  }
+}
