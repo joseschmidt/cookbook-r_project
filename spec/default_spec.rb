@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe 'r_project::default' do
@@ -33,7 +34,7 @@ describe 'r_project::default' do
     end # before
 
     it 'does not create remote_file' do
-      qcc_tar_gz = "qcc_2.718.tar.gz"
+      qcc_tar_gz = 'qcc_2.718.tar.gz'
       qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
       expect(chef_run).to_not create_remote_file(qcc_filename)
     end # it
@@ -45,7 +46,7 @@ describe 'r_project::default' do
 
   context 'when qcc is not installed' do
     it 'creates remote_file owned by root:root' do
-      qcc_tar_gz = "qcc_2.718.tar.gz"
+      qcc_tar_gz = 'qcc_2.718.tar.gz'
       qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
       expect(chef_run).to create_remote_file(qcc_filename)
         .with(:owner => 'root', :group => 'root')

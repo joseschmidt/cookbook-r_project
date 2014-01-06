@@ -1,3 +1,4 @@
+# coding: utf-8
 name              'r_project'
 version           '0.1.0'
 
