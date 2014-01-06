@@ -1,7 +1,7 @@
 # coding: utf-8
 #
 # Cookbook Name:: r_project
-# Attributes:: default 
+# Attributes:: default
 #
 
 default['r_project']['r']['version']    = '2.15.2-1.el5'
