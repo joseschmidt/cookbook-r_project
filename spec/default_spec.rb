@@ -41,7 +41,7 @@ describe 'r_project::default' do
   end # it
 
   it 'should not uninstall R' do
-    chef_run.should_not execute_command "sudo -E sh -c 'R CMD REMOVE qcc'"
+    expect(chef_run).to_not run_execute("sudo -E sh -c 'R CMD REMOVE qcc'")
   end # it
 
 end # describe
