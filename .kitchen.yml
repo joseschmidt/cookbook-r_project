@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  # locally-provisioned opscode-centos-5.10 box with omnibus chef 11.8.2
+  - name: centos-5.10-chef-11.8.2
+    driver:
+      box: opscode-centos-5.10-chef-11.8.2
+
+  # locally-provisioned opscode-centos-6.5 box with omnibus chef 11.8.2
+  - name: centos-6.5-chef-11.8.2
+    driver:
+      box: opscode-centos-6.5-chef-11.8.2
+
+suites:
+  - name: r_project
+    run_list:
+      - 'recipe[r_project]'
+    attributes:
+      r_project:
+        r:
+          version: '3.0.2-1.el6'
