@@ -20,7 +20,4 @@ suites:
   - name: r_project
     run_list:
       - 'recipe[r_project]'
-    attributes:
-      r_project:
-        r:
-          version: '3.0.2-1.el6'
+    attributes: {}
