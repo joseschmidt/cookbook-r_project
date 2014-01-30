@@ -4,7 +4,7 @@
 # Attributes:: default
 #
 
-if platform_family?('rhel') && node['platform_version'][0] == '6' then
+if platform_family?('rhel') && node['platform_version'][0] == '6'
   default['r_project']['r']['version']    = '3.0.2-1.el6'
 else
   default['r_project']['r']['version']    = '2.15.2-1.el5'
