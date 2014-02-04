@@ -4,6 +4,8 @@ CHANGELOG
 TBD
 ------------------
 
+- `NEW` add emeril gem to publish cookbook | [#34][]
+- `NEW` add [CHANGELOG](CHANGELOG.md) | [#33][]
 - `IMPROVE` update chefspec gem to v3.2.0 | [#32][]
 - `IMPROVE` update [README](README.md) | [#30][]
 - `NEW` add [TESTING](TESTING.md) | [#26][]
