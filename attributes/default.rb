@@ -4,11 +4,15 @@
 # Attributes:: default
 #
 
-if platform_family?('rhel') && node['platform_version'][0] == '6'
-  default['r_project']['r']['version']    = '3.0.2-1.el6'
-else
-  default['r_project']['r']['version']    = '2.15.2-1.el5'
-end # if
+default['r_project']['r']['version'] =
+case node['platform_family']
+when 'rhel'
+  if node['platform_version'].to_f < 6.0
+    '2.15.2-1.el5'
+  else
+    '3.0.2-1.el6'
+  end # if
+end # case
 
 default['r_project']['qcc']['version']  = '2.2'
 default['r_project']['qcc']['url']      = 'http://cran.r-project.org/src/' +
