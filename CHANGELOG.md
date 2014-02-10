@@ -57,3 +57,5 @@ Legend
 [#26]: https://github.com/jhx/cookbook-r_project/issues/26
 [#30]: https://github.com/jhx/cookbook-r_project/issues/30
 [#32]: https://github.com/jhx/cookbook-r_project/issues/32
+[#33]: https://github.com/jhx/cookbook-r_project/issues/33
+[#34]: https://github.com/jhx/cookbook-r_project/issues/34
