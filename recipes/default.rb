@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'yum::epel'
+include_recipe 'yum::epel' if platform_family?('rhel')
 
 #-------------------------------------------------------- install dependencies
 # install R via epel
