@@ -21,6 +21,7 @@
 include_recipe 'yum::epel' if platform_family?('rhel')
 
 #-------------------------------------------------------- install dependencies
+Chef::Config['yum_timeout'] = 1800
 # install R via epel
 package 'R' do
   version node['r_project']['r']['version']
