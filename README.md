@@ -1,6 +1,7 @@
 r_project Cookbook
 ==================
 [![Build Status](https://travis-ci.org/jhx/cookbook-r_project.png?branch=master)](https://travis-ci.org/jhx/cookbook-r_project)
+[![Dependency Status](https://gemnasium.com/jhx/cookbook-r_project.png)](https://gemnasium.com/jhx/cookbook-r_project)
 
 Installs the R language, environment, and related packages.
 
