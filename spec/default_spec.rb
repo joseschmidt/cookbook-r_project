@@ -11,14 +11,8 @@ describe 'r_project::default' do
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
       # override cookbook attributes
-      node.set['r_project'] = {
-        'qcc' => {
-          'version' => '2.718'
-        },
-        'r' => {
-          'version' => '0.0.0'
-        }
-      }
+      node.set['r_project']['qcc']['version'] = '2.718'
+      node.set['r_project']['r']['version'] = '0.0.0'
     end.converge(described_recipe)
   end # let
 
