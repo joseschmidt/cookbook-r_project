@@ -4,7 +4,7 @@ require 'spec_helper'
 describe 'r_project::default' do
   os = backend(Serverspec::Commands::Base).check_os
 
-  context yumrepo('epel') do
+  describe yumrepo('epel') do
     it 'exists' do
       expect(subject).to exist
     end # it
@@ -33,10 +33,10 @@ describe 'r_project::default' do
     end # case
   end # describe
 
-  context command("echo 'library(qcc)' | R --vanilla --quiet") do
+  describe command("echo 'library(qcc)' | R --vanilla --quiet") do
     it 'is installed (R qcc library)' do
       expect(subject).to return_exit_status(0)
     end # it
-  end # context
+  end # describe
 
 end # describe
