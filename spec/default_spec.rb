@@ -27,11 +27,11 @@ describe 'r_project::default' do
         .and_return(true)
     end # before
 
-    it 'does not create remote_file' do
-      qcc_tar_gz = 'qcc_2.718.tar.gz'
-      qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
-      expect(chef_run).to_not create_remote_file(qcc_filename)
-    end # it
+    describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
+      it 'does not create remote file' do
+        expect(chef_run).to_not create_remote_file(subject)
+      end # it
+    end # describe
 
     it 'does not install qcc library' do
       expect(chef_run).to_not run_bash('install_qcc_library')
@@ -39,12 +39,12 @@ describe 'r_project::default' do
   end # context
 
   context 'when qcc is not installed' do
-    it 'creates remote_file owned by root:root' do
-      qcc_tar_gz = 'qcc_2.718.tar.gz'
-      qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
-      expect(chef_run).to create_remote_file(qcc_filename)
-        .with(:owner => 'root', :group => 'root')
-    end # it
+    describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
+      it 'creates remote file with expected owner, group' do
+        expect(chef_run).to create_remote_file(subject)
+          .with(:owner => 'root', :group => 'root')
+      end # it
+    end # describe
 
     it 'installs qcc library' do
       expect(chef_run).to run_bash('install_qcc_library')
