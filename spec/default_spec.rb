@@ -52,9 +52,9 @@ describe 'r_project::default' do
 
   context 'when qcc is not installed' do
     describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
-      it 'creates remote file with expected owner, group' do
+      it 'creates remote file with expected owner, group, mode' do
         expect(chef_run).to create_remote_file(subject)
-          .with(:owner => 'root', :group => 'root')
+          .with(:owner => 'root', :group => 'root', :mode => '0644')
       end # it
     end # describe
 
