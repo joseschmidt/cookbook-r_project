@@ -16,9 +16,21 @@ describe 'r_project::default' do
     end.converge(described_recipe)
   end # let
 
-  it 'installs R v0.0.0' do
-    expect(chef_run).to install_package('R').with(:version => '0.0.0')
-  end # it
+  describe 'yum::epel' do
+    it 'includes described recipe if platform family is rhel' do
+      if platform?(:rhel)
+        expect(chef_run).to include_recipe(subject)
+      else
+        expect(chef_run).to_not include_recipe(subject)
+      end # if
+    end # it
+  end # describe
+
+  describe 'R' do
+    it 'installs described package' do
+      expect(chef_run).to install_package(subject).with_version('0.0.0')
+    end # it
+  end # describe
 
   context 'when qcc is installed' do
     before do
