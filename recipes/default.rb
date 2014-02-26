@@ -35,24 +35,24 @@ qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
 # download qcc unless library is already installed
 qcc_installed = "echo 'library(qcc)' | R --vanilla --quiet"
 remote_file qcc_filename do
-  source   node['r_project']['qcc']['url']
-  checksum node['r_project']['qcc']['checksum']
-  owner    'root'
-  group    'root'
-  mode     '0644'
-  notifies :run, 'bash[install_qcc_library]', :immediately
-  not_if qcc_installed
+  source    node['r_project']['qcc']['url']
+  checksum  node['r_project']['qcc']['checksum']
+  owner     'root'
+  group     'root'
+  mode      '0644'
+  notifies  :run, 'bash[install_qcc_library]', :immediately
+  not_if    qcc_installed
 end # remote_file
 
 # install qcc library
 bash 'install_qcc_library' do
-  cwd ::File.dirname(qcc_filename)
-  code "sudo -E sh -c 'R CMD INSTALL #{qcc_filename}'"
-  not_if qcc_installed
+  cwd     ::File.dirname(qcc_filename)
+  code    "sudo -E sh -c 'R CMD INSTALL #{qcc_filename}'"
+  not_if  qcc_installed
 end # bash
 
 # uninstall qcc library (not currently used)
 bash 'uninstall_qcc_library' do
-  code "sudo -E sh -c 'R CMD REMOVE qcc'"
-  action :nothing
+  code    "sudo -E sh -c 'R CMD REMOVE qcc'"
+  action  :nothing
 end # bash
