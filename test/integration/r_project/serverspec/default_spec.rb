@@ -40,7 +40,7 @@ describe 'r_project::default' do
 
     it 'is expected version' do
       expect(subject.stdout).to include(
-        "Package 'qcc', version 2.2"
+        "Package 'qcc', version 2.3"
       )
     end # it
   end # describe
