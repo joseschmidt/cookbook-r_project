@@ -27,22 +27,25 @@ package 'R' do
   version node['r_project']['r']['version']
 end # package
 
-#------------------------------------------------------ download & install qcc
+#-------------------------------------------------------- upload & install qcc
+# current release:
+#   http://cran.r-project.org/src/contrib/qcc_2.3.tar.gz
+# archived releases:
+#   http://cran.r-project.org/src/contrib/Archive/qcc
+
 # set qcc filename
 qcc_tar_gz = "qcc_#{node['r_project']['qcc']['version']}.tar.gz"
 qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
 
-# download qcc unless library is already installed
+# upload qcc unless library is already installed
 qcc_installed = "echo 'library(qcc)' | R --vanilla --quiet"
-remote_file qcc_filename do
-  source    node['r_project']['qcc']['url']
-  checksum  node['r_project']['qcc']['checksum']
+cookbook_file qcc_filename do
   owner     'root'
   group     'root'
   mode      '0644'
   notifies  :run, 'bash[install_qcc_library]', :immediately
   not_if    qcc_installed
-end # remote_file
+end # cookbook_file
 
 # install qcc library
 bash 'install_qcc_library' do
