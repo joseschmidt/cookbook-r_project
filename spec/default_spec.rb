@@ -32,18 +32,19 @@ describe 'r_project::default' do
     end # it
   end # describe
 
+  describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
+    it 'creates cookbook file with expected owner, group, mode' do
+      expect(chef_run).to create_cookbook_file(subject)
+        .with(:owner => 'root', :group => 'root', :mode => '0644')
+    end # it
+  end # describe
+
   context 'when qcc is installed' do
     before do
       # required for not_if attribute; prevents qcc library download
-      stub_command("echo 'library(qcc)' | R --vanilla --quiet")
-        .and_return(true)
+      String.any_instance.stub(:include?)
+        .with("Package 'qcc', version 2.718").and_return(true)
     end # before
-
-    describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
-      it 'does not create cookbook file' do
-        expect(chef_run).to_not create_cookbook_file(subject)
-      end # it
-    end # describe
 
     it 'does not install qcc library' do
       expect(chef_run).to_not run_bash('install_qcc_library')
@@ -51,19 +52,18 @@ describe 'r_project::default' do
   end # context
 
   context 'when qcc is not installed' do
-    describe "#{Chef::Config['file_cache_path']}/qcc_2.718.tar.gz" do
-      it 'creates cookbook file with expected owner, group, mode' do
-        expect(chef_run).to create_cookbook_file(subject)
-          .with(:owner => 'root', :group => 'root', :mode => '0644')
-      end # it
-    end # describe
+    before do
+      # required for not_if attribute; prevents qcc library download
+      String.any_instance.stub(:include?)
+        .with("Package 'qcc', version 2.718").and_return(false)
+    end # before
 
     it 'installs qcc library' do
       expect(chef_run).to run_bash('install_qcc_library')
     end # it
   end # context
 
-  it 'does not uninstall R' do
+  it 'does not uninstall qcc library' do
     expect(chef_run).to_not run_bash('uninstall_qcc_library')
   end # it
 

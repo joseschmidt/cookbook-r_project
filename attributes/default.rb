@@ -14,4 +14,4 @@ when 'rhel'
   end # if
 end # case
 
-default['r_project']['qcc']['version']  = '2.2'
+default['r_project']['qcc']['version'] = '2.2'

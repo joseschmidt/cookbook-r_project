@@ -33,9 +33,15 @@ describe 'r_project::default' do
     end # case
   end # describe
 
-  describe command("echo 'library(qcc)' | R --vanilla --quiet") do
+  describe command("R --vanilla --quiet -e 'library(qcc)' 2>&1") do
     it 'is installed (R qcc library)' do
       expect(subject).to return_exit_status(0)
+    end # it
+
+    it 'is expected version' do
+      expect(subject.stdout).to include(
+        "Package 'qcc', version 2.2"
+      )
     end # it
   end # describe
 
