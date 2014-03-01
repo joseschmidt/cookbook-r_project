@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'yum::epel' if platform_family?('rhel')
+include_recipe 'yum-epel' if platform_family?('rhel')
 
 #-------------------------------------------------------- install dependencies
 Chef::Config['yum_timeout'] = 1800
