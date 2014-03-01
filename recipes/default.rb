@@ -37,21 +37,23 @@ end # package
 qcc_tar_gz = "qcc_#{node['r_project']['qcc']['version']}.tar.gz"
 qcc_filename = "#{Chef::Config['file_cache_path']}/#{qcc_tar_gz}"
 
-# upload qcc unless library is already installed
-qcc_installed = "echo 'library(qcc)' | R --vanilla --quiet"
+# upload qcc library
 cookbook_file qcc_filename do
   owner     'root'
   group     'root'
   mode      '0644'
-  notifies  :run, 'bash[install_qcc_library]', :immediately
-  not_if    qcc_installed
 end # cookbook_file
 
-# install qcc library
+# install qcc library unless already installed
+cmd = Mixlib::ShellOut.new("R --vanilla --quiet -e 'library(qcc)' 2>&1")
 bash 'install_qcc_library' do
   cwd     ::File.dirname(qcc_filename)
   code    "sudo -E sh -c 'R CMD INSTALL #{qcc_filename}'"
-  not_if  qcc_installed
+  not_if    do
+    cmd.run_command.stdout.include?(
+      "Package 'qcc', version #{node['r_project']['qcc']['version']}"
+    )
+  end # notif
 end # bash
 
 # uninstall qcc library (not currently used)
