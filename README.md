@@ -11,7 +11,7 @@ Requirements
 ### Cookbooks
 The following cookbook is a direct dependency because it's used for common "default" functionality.
 
-- `yum` (for `r_project::default`)
+- [`yum-epel`](https://github.com/opscode-cookbooks/yum-epel)
 
 ### Platforms
 The following platforms are supported and tested under Test Kitchen:
