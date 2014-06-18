@@ -10,7 +10,12 @@ group :test do
   gem 'berkshelf', '~> 3.1.1'
   gem 'chefspec', '~> 3.4.0'
   gem 'foodcritic', '~> 3.0.3'
-  gem 'rubocop', '~> 0.18.1'
+
+  # TODO: remove rspec dependency declaration;
+  # chefspec specifies rspec ~2.14 and 2.99.0 breaks
+  gem 'rspec', '~> 2.14.0'
+
+  gem 'rubocop', '~> 0.23.0'
 end # group
 
 group :integration do
